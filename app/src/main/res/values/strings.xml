@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">DoctorAppointmentSystem</string>
+    <string name="email">E-mail</string>
+    <string name="password">Password</string>
+    <string name="name_surname">Name Surname</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="birthday">Date of birth</string>
+    <string name="signup">Sign up</string>
 </resources>

@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/fragmentSignup"
-        android:name="com.envercelik.doctorappointmentsystem.SignupFragment"
+        android:name="com.envercelik.doctorappointmentsystem.SignupUserFragment"
         android:label="fragment_signup"
-        tools:layout="@layout/fragment_signup" />
+        tools:layout="@layout/fragment_user_signup" />
 </navigation>
