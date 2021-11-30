@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "531598336955",
+    "project_id": "doctorappointmentsystem-7a5b9",
+    "storage_bucket": "doctorappointmentsystem-7a5b9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:531598336955:android:0621876292f9f0e99c5a9e",
+        "android_client_info": {
+          "package_name": "com.envercelik.doctorappointmentsystem"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "531598336955-4ercpb0qf19emqg3gfd3av017ip1p97q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCPjjnuD4nA7azZgDJcw5cHsUW-2wZ9RMw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "531598336955-4ercpb0qf19emqg3gfd3av017ip1p97q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
