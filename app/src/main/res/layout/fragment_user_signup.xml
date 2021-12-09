@@ -5,6 +5,9 @@
 
     <data>
 
+        <variable
+            name="viewModel"
+            type="com.envercelik.doctorappointmentsystem.SignupUserViewModel" />
     </data>
 
     <LinearLayout
@@ -24,7 +27,8 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textEmailAddress" />
+                android:inputType="textEmailAddress"
+                android:text="@={viewModel.email}" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -38,6 +42,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
+                android:text="@={viewModel.password}"
                 app:endIconMode="password_toggle" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -51,7 +56,8 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                android:text="@{viewModel.nameSurname}" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -65,7 +71,9 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="date" />
+                android:inputType="date"
+                android:maxLength="4"
+                android:text="@={viewModel.birthDay}" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <RadioGroup
@@ -73,6 +81,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
+            android:checkedButton="@={viewModel.gender}"
             android:orientation="horizontal">
 
             <RadioButton
@@ -95,6 +104,7 @@
             android:id="@+id/buttonSignup"
             android:layout_width="match_parent"
             android:layout_height="64dp"
+            android:onClick="@{() -> viewModel.onSignupButtonClicked()}"
             android:text="@string/signup"
             app:cornerRadius="32dp" />
     </LinearLayout>
