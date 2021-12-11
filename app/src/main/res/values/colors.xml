@@ -3,4 +3,5 @@
     <color name="primary">#399793</color>
     <color name="primaryVariant">#006965</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="errorTextColor">#B00020</color>
 </resources>

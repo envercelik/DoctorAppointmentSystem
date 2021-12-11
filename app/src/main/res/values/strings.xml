@@ -7,4 +7,5 @@
     <string name="female">Female</string>
     <string name="birthday">Date of birth (year)</string>
     <string name="signup">Sign up</string>
+    <string name="please_select_gender">please select gender</string>
 </resources>
