@@ -54,7 +54,7 @@ class SignupUserViewModel : ViewModel() {
         val nameSurname = nameSurname.value.orEmpty()
         when {
             nameSurname.isEmpty() -> _nameSurnameErrorMessage.value = "name surname is required"
-            nameSurname.any { !it.isLetter() } -> _nameSurnameErrorMessage.value =
+            !nameSurname.all { it.isLetter() || it == ' ' } -> _nameSurnameErrorMessage.value =
                 "invalid name surname"
             else -> _nameSurnameErrorMessage.value = null
         }
