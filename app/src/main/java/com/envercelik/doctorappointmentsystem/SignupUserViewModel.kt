@@ -3,6 +3,10 @@ package com.envercelik.doctorappointmentsystem
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.envercelik.doctorappointmentsystem.data.FirebaseAuthService
+import com.envercelik.doctorappointmentsystem.data.FirebaseProfileService
+import kotlinx.coroutines.launch
 import java.util.regex.Pattern
 
 class SignupUserViewModel : ViewModel() {
@@ -31,8 +35,59 @@ class SignupUserViewModel : ViewModel() {
         if (isEmailValid() and isPasswordValid() and isNameSurnameValid() and isBirthDayValid() and
             isGenderSelected()
         ) {
-            TODO("send signup request")
+            val email = email.value.toString()
+            val password = password.value.toString()
+
+            signupUser(email,password)
         }
+    }
+
+    private fun signupUser(email: String, password: String) {
+        viewModelScope.launch {
+            when (val authResponse = FirebaseAuthService.signup(email, password)) {
+                is Resource.Success -> saveUser(authResponse.data!!.uid)
+                is Resource.Loading -> onLoading()
+                is Resource.Error -> onError(authResponse.message)
+            }
+        }
+    }
+
+    private fun saveUser(uid: String) {
+        viewModelScope.launch {
+            when (val response =
+                FirebaseProfileService.createUserInFireStore(getUserFromUi(), uid)) {
+                is Resource.Success -> navigateToAppointmentScreen()
+                is Resource.Loading -> onLoading()
+                is Resource.Error -> onError(response.message)
+            }
+        }
+    }
+
+    private fun navigateToAppointmentScreen() {
+        TODO("navigateToAppointmentScreen")
+    }
+
+    private fun onLoading() {
+        TODO("show loading indicator")
+    }
+
+    private fun onError(message: String?) {
+        TODO("show error message using toast or snack bar")
+
+    }
+
+    private fun getUserFromUi(): User {
+        val nameSurname = nameSurname.value.toString()
+        val gender = getGender()
+        val birthYear = birthDay.value.toString()
+
+        return User(nameSurname, gender, birthYear)
+    }
+
+    private fun getGender() = when (gender.value) {
+        R.id.radioButtonMale -> "male"
+        R.id.radioButtonFemale -> "female"
+        else -> "unknown"
     }
 
     private fun isGenderSelected(): Boolean {
