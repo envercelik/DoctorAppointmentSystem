@@ -10,115 +10,132 @@
             type="com.envercelik.doctorappointmentsystem.SignupUserViewModel" />
     </data>
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="@dimen/padding_16"
-        tools:context=".SignupUserFragment">
+        android:layout_height="match_parent">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayoutEmail"
-            style="@style/roundedTextInputLayout"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/email"
-            app:error="@{viewModel.emailErrorMessage}">
+            android:layout_height="wrap_content">
 
-            <com.google.android.material.textfield.TextInputEditText
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textEmailAddress"
-                android:text="@={viewModel.email}" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:orientation="vertical"
+                android:padding="@dimen/padding_16"
+                tools:context=".SignupUserFragment">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayoutPassword"
-            style="@style/roundedTextInputLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/password"
-            app:error="@{viewModel.passwordErrorMessage}">
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputLayoutEmail"
+                    style="@style/roundedTextInputLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/email"
+                    app:error="@{viewModel.emailErrorMessage}">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textPassword"
-                android:text="@={viewModel.password}"
-                app:endIconMode="password_toggle" />
-        </com.google.android.material.textfield.TextInputLayout>
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textEmailAddress"
+                        android:text="@={viewModel.email}" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayoutNameSurname"
-            style="@style/roundedTextInputLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/name_surname"
-            app:error="@{viewModel.nameSurnameErrorMessage}">
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputLayoutPassword"
+                    style="@style/roundedTextInputLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/password"
+                    app:error="@{viewModel.passwordErrorMessage}">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textPersonName"
-                android:text="@={viewModel.nameSurname}" />
-        </com.google.android.material.textfield.TextInputLayout>
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPassword"
+                        android:text="@={viewModel.password}"
+                        app:endIconMode="password_toggle" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayoutBirthday"
-            style="@style/roundedTextInputLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/birthday"
-            app:error="@{viewModel.birthDayErrorMessage}"
-            app:startIconDrawable="@drawable/ic_baseline_date_range_24">
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputLayoutNameSurname"
+                    style="@style/roundedTextInputLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/name_surname"
+                    app:error="@{viewModel.nameSurnameErrorMessage}">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="date"
-                android:maxLength="4"
-                android:text="@={viewModel.birthDay}" />
-        </com.google.android.material.textfield.TextInputLayout>
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPersonName"
+                        android:text="@={viewModel.nameSurname}" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-        <RadioGroup
-            android:id="@+id/radioGroupGender"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:checkedButton="@={viewModel.gender}"
-            android:orientation="horizontal">
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputLayoutBirthday"
+                    style="@style/roundedTextInputLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/birthday"
+                    app:error="@{viewModel.birthDayErrorMessage}"
+                    app:startIconDrawable="@drawable/ic_baseline_date_range_24">
 
-            <RadioButton
-                android:id="@+id/radioButtonMale"
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="date"
+                        android:maxLength="4"
+                        android:text="@={viewModel.birthDay}" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <RadioGroup
+                    android:id="@+id/radioGroupGender"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:checkedButton="@={viewModel.gender}"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/radioButtonMale"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="16dp"
+                        android:text="@string/male"
+                        android:value="1" />
+
+                    <RadioButton
+                        android:id="@+id/radioButtonFemale"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="@string/female"
+                        android:value="2" />
+                </RadioGroup>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:text="@string/please_select_gender"
+                    android:textColor="@color/errorTextColor"
+                    android:textSize="12sp"
+                    app:isVisible="@{viewModel.isGenderErrorMessageVisible()}" />
+
+                <Button
+                    android:id="@+id/buttonSignup"
+                    android:layout_width="match_parent"
+                    android:layout_height="64dp"
+                    android:layout_marginTop="16dp"
+                    android:onClick="@{() -> viewModel.onSignupButtonClicked()}"
+                    android:text="@string/signup"
+                    app:cornerRadius="32dp" />
+            </LinearLayout>
+
+            <com.google.android.material.progressindicator.CircularProgressIndicator
+                android:id="@+id/progressIndicator"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginEnd="16dp"
-                android:text="@string/male"
-                android:value="1" />
-
-            <RadioButton
-                android:id="@+id/radioButtonFemale"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="@string/female"
-                android:value="2" />
-        </RadioGroup>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:text="@string/please_select_gender"
-            android:textColor="@color/errorTextColor"
-            android:textSize="12sp"
-            app:isVisible="@{viewModel.isGenderErrorMessageVisible()}" />
-
-        <Button
-            android:id="@+id/buttonSignup"
-            android:layout_width="match_parent"
-            android:layout_height="64dp"
-            android:layout_marginTop="16dp"
-            android:onClick="@{() -> viewModel.onSignupButtonClicked()}"
-            android:text="@string/signup"
-            app:cornerRadius="32dp" />
-    </LinearLayout>
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:indeterminate="true"/>
+        </FrameLayout>
+    </ScrollView>
 </layout>
