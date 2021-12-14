@@ -4,6 +4,7 @@ import com.envercelik.doctorappointmentsystem.Resource
 import com.envercelik.doctorappointmentsystem.Resource.*
 import com.envercelik.doctorappointmentsystem.data.model.AuthResponse
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseAuthException
 import kotlinx.coroutines.tasks.await
 
 object FirebaseAuthService {
@@ -14,8 +15,11 @@ object FirebaseAuthService {
             Loading<AuthResponse>()
             val result = auth.createUserWithEmailAndPassword(email, password).await()
             Success(AuthResponse(result.user!!.uid))
-        } catch (e: Exception) {
-            Error(e.message.toString())
+        }catch (e: FirebaseAuthException) {
+            Error(e.message ?: "unexpected error occurred")
+        }
+        catch (e: Exception) {
+            Error("unexpected error occurred. please check your internet connection")
         }
     }
 }

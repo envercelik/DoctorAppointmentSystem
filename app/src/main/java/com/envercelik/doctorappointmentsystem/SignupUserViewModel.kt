@@ -4,8 +4,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.envercelik.doctorappointmentsystem.Resource.Error
+import com.envercelik.doctorappointmentsystem.Resource.Loading
+import com.envercelik.doctorappointmentsystem.Resource.Success
 import com.envercelik.doctorappointmentsystem.data.FirebaseAuthService
 import com.envercelik.doctorappointmentsystem.data.FirebaseProfileService
+import com.hadilq.liveevent.LiveEvent
 import kotlinx.coroutines.launch
 import java.util.regex.Pattern
 
@@ -31,6 +35,15 @@ class SignupUserViewModel : ViewModel() {
     private val _isGenderErrorMessageVisible = MutableLiveData<Boolean>(false)
     val isGenderErrorMessageVisible: LiveData<Boolean> = _isGenderErrorMessageVisible
 
+    private val _loadingBarState = MutableLiveData<Boolean>(false)
+    val loadingBarState: LiveData<Boolean> = _loadingBarState
+
+    private val _navigateToAppointmentScreenState = LiveEvent<Boolean>()
+    val navigateToAppointmentScreenState: LiveEvent<Boolean> = _navigateToAppointmentScreenState
+
+    private val _errorState = LiveEvent<String>()
+    val errorState: LiveData<String> = _errorState
+
     fun onSignupButtonClicked() {
         if (isEmailValid() and isPasswordValid() and isNameSurnameValid() and isBirthDayValid() and
             isGenderSelected()
@@ -38,42 +51,57 @@ class SignupUserViewModel : ViewModel() {
             val email = email.value.toString()
             val password = password.value.toString()
 
-            signupUser(email,password)
+            signup(email,password)
         }
     }
 
-    private fun signupUser(email: String, password: String) {
+    private fun signup(email: String, password: String) {
         viewModelScope.launch {
-            when (val authResponse = FirebaseAuthService.signup(email, password)) {
-                is Resource.Success -> saveUser(authResponse.data!!.uid)
-                is Resource.Loading -> onLoading()
-                is Resource.Error -> onError(authResponse.message)
+            when (val response = FirebaseAuthService.signup(email, password)) {
+                is Success -> onSignupResponseSuccess(response.data!!.uid)
+                is Loading -> onSignupResponseLoading()
+                is Error -> onSignupResponseFail(response.message!!)
             }
         }
+    }
+
+    private fun onSignupResponseFail(message: String) {
+        _loadingBarState.value = false
+        _errorState.value = message
+    }
+
+    private fun onSignupResponseLoading() {
+        _loadingBarState.value = true
+    }
+
+    private fun onSignupResponseSuccess(uid: String) {
+        saveUser(uid)
     }
 
     private fun saveUser(uid: String) {
         viewModelScope.launch {
             when (val response =
                 FirebaseProfileService.createUserInFireStore(getUserFromUi(), uid)) {
-                is Resource.Success -> navigateToAppointmentScreen()
-                is Resource.Loading -> onLoading()
-                is Resource.Error -> onError(response.message)
+                is Success -> onSaveUserResponseSuccess()
+                is Loading -> onSaveUserResponseLoading()
+                is Error -> onSaveUserResponseFail(response.message!!)
             }
         }
     }
 
-    private fun navigateToAppointmentScreen() {
-        TODO("navigateToAppointmentScreen")
+    private fun onSaveUserResponseFail(message: String) {
+        _loadingBarState.value = false
+        _errorState.value = message
+        //deleteUser()
     }
 
-    private fun onLoading() {
-        TODO("show loading indicator")
+    private fun onSaveUserResponseLoading() {
+        _loadingBarState.value = true
     }
 
-    private fun onError(message: String?) {
-        TODO("show error message using toast or snack bar")
-
+    private fun onSaveUserResponseSuccess() {
+        _loadingBarState.value = false
+        _navigateToAppointmentScreenState.value = true
     }
 
     private fun getUserFromUi(): User {

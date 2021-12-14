@@ -3,6 +3,7 @@ package com.envercelik.doctorappointmentsystem.data
 import com.envercelik.doctorappointmentsystem.Resource
 import com.envercelik.doctorappointmentsystem.Resource.*
 import com.envercelik.doctorappointmentsystem.User
+import com.google.firebase.firestore.FirebaseFirestoreException
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.tasks.await
@@ -10,13 +11,15 @@ import kotlinx.coroutines.tasks.await
 object FirebaseProfileService {
     private val userCollection = Firebase.firestore.collection("users")
 
-    suspend fun createUserInFireStore(user: User, uid: String): Resource<Void> {
+    suspend fun createUserInFireStore(user: User, uid: String): Resource<Boolean> {
         return try {
-            Loading<Void>()
-            val result = userCollection.document(uid).set(user).await()
-            Success(result)
+            Loading<Nothing>()
+            userCollection.document(uid).set(user).await()
+            Success(true)
+        } catch (e: FirebaseFirestoreException) {
+            Error(e.message ?: "unexpected error occurred")
         } catch (e: Exception) {
-            Error(e.message.toString())
+            Error("unexpected error occurred. please check your internet connection")
         }
     }
 }
