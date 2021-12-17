@@ -8,4 +8,6 @@
     <string name="birthday">Date of birth (year)</string>
     <string name="signup">Sign up</string>
     <string name="please_select_gender">please select gender</string>
+    <string name="login">Login</string>
+    <string name="create_an_account">or create an account?</string>
 </resources>
