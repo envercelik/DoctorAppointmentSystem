@@ -4,16 +4,15 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.envercelik.doctorappointmentsystem.Resource.Error
-import com.envercelik.doctorappointmentsystem.Resource.Loading
-import com.envercelik.doctorappointmentsystem.Resource.Success
+import com.envercelik.doctorappointmentsystem.Resource.*
 import com.envercelik.doctorappointmentsystem.data.FirebaseAuthService
 import com.envercelik.doctorappointmentsystem.data.FirebaseProfileService
 import com.hadilq.liveevent.LiveEvent
 import kotlinx.coroutines.launch
-import java.util.regex.Pattern
 
 class SignupUserViewModel : ViewModel() {
+    private val validator = SignupValidator()
+
     val email = MutableLiveData<String>()
     val password = MutableLiveData<String>()
     val nameSurname = MutableLiveData<String>()
@@ -51,7 +50,7 @@ class SignupUserViewModel : ViewModel() {
             val email = email.value.toString()
             val password = password.value.toString()
 
-            signup(email,password)
+            signup(email, password)
         }
     }
 
@@ -123,58 +122,23 @@ class SignupUserViewModel : ViewModel() {
         return gender.value != 0
     }
 
-    private fun isBirthDayValid(): Boolean {
-        val birthDay = birthDay.value.orEmpty()
-        when {
-            birthDay.isEmpty() -> _birthDayErrorMessage.value = "birthday is required"
-            birthDay.length != 4 -> _birthDayErrorMessage.value = "invalid birth day"
-            else -> _birthDayErrorMessage.value = null
-        }
-        return _birthDayErrorMessage.value == null
+    private fun isEmailValid(): Boolean {
+        _emailErrorMessage.value = validator.validateEmail(email.value.orEmpty())
+        return _emailErrorMessage.value == null
     }
 
     private fun isNameSurnameValid(): Boolean {
-        val nameSurname = nameSurname.value.orEmpty()
-        when {
-            nameSurname.isEmpty() -> _nameSurnameErrorMessage.value = "name surname is required"
-            !nameSurname.all { it.isLetter() || it == ' ' } -> _nameSurnameErrorMessage.value =
-                "invalid name surname"
-            else -> _nameSurnameErrorMessage.value = null
-        }
-        return _nameSurnameErrorMessage.value == null
+        _nameSurnameErrorMessage.value = validator.validateNameSurname(nameSurname.value.orEmpty())
+        return _birthDayErrorMessage.value == null
     }
 
     private fun isPasswordValid(): Boolean {
-        val password = password.value.orEmpty()
-        when {
-            password.isEmpty() -> _passwordErrorMessage.value = "password is required"
-            password.length < 7 -> _passwordErrorMessage.value = "password is too short"
-            !password.any { it.isDigit() } -> _passwordErrorMessage.value =
-                "password must contain one digit"
-            password.all { it.isLetterOrDigit() } -> _passwordErrorMessage.value =
-                "password must contain one special character"
-            else -> _passwordErrorMessage.value = null
-        }
-        return _passwordErrorMessage.value == null
+        _passwordErrorMessage.value = validator.validatePassword(password.value.orEmpty())
+        return _birthDayErrorMessage.value == null
     }
 
-    private fun isEmailValid(): Boolean {
-        val email = email.value.orEmpty()
-        val emailValidationPattern: Pattern = Pattern.compile(
-            "[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{4,49}" +
-                    "\\@" +
-                    "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}" +
-                    "(" +
-                    "\\." +
-                    "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25}" +
-                    ")+"
-        )
-        when {
-            email.isEmpty() -> _emailErrorMessage.value = "email is required"
-            !emailValidationPattern.matcher(email).matches() -> _emailErrorMessage.value =
-                "email is invalid"
-            else -> _emailErrorMessage.value = null
-        }
-        return _emailErrorMessage.value == null
+    private fun isBirthDayValid(): Boolean {
+        _birthDayErrorMessage.value = validator.validateBirthdate(birthDay.value.orEmpty())
+        return _birthDayErrorMessage.value == null
     }
 }
