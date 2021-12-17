@@ -2,7 +2,7 @@ package com.envercelik.doctorappointmentsystem.data
 
 import com.envercelik.doctorappointmentsystem.Resource
 import com.envercelik.doctorappointmentsystem.Resource.*
-import com.envercelik.doctorappointmentsystem.User
+import com.envercelik.doctorappointmentsystem.ui.model.User
 import com.google.firebase.firestore.FirebaseFirestoreException
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase

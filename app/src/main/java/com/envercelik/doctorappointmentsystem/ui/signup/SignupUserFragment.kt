@@ -1,4 +1,4 @@
-package com.envercelik.doctorappointmentsystem
+package com.envercelik.doctorappointmentsystem.ui.signup
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.envercelik.doctorappointmentsystem.R
 import com.envercelik.doctorappointmentsystem.databinding.FragmentUserSignupBinding
 import com.google.android.material.snackbar.Snackbar
 

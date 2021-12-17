@@ -1,4 +1,4 @@
-package com.envercelik.doctorappointmentsystem
+package com.envercelik.doctorappointmentsystem.ui.model
 
 data class User(
     val nameSurname: String,

@@ -1,12 +1,14 @@
-package com.envercelik.doctorappointmentsystem
+package com.envercelik.doctorappointmentsystem.ui.signup
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.envercelik.doctorappointmentsystem.R
 import com.envercelik.doctorappointmentsystem.Resource.*
 import com.envercelik.doctorappointmentsystem.data.FirebaseAuthService
 import com.envercelik.doctorappointmentsystem.data.FirebaseProfileService
+import com.envercelik.doctorappointmentsystem.ui.model.User
 import com.hadilq.liveevent.LiveEvent
 import kotlinx.coroutines.launch
 

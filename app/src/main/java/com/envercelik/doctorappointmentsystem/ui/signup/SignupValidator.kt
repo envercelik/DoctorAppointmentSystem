@@ -1,4 +1,4 @@
-package com.envercelik.doctorappointmentsystem
+package com.envercelik.doctorappointmentsystem.ui.signup
 
 import java.util.regex.Pattern
 
