@@ -69,6 +69,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/create_an_account"
+                android:onClick="@{() -> viewModel.onCreateAccountButtonClicked()}"
                 android:textAllCaps="false" />
         </LinearLayout>
 
@@ -77,6 +78,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:indeterminate="true" />
+            android:indeterminate="true"
+            app:isVisible="@{viewModel.loadingBarState}" />
     </FrameLayout>
 </layout>

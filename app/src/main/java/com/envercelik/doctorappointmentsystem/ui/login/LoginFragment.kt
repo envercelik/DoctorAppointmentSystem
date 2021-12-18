@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.envercelik.doctorappointmentsystem.databinding.FragmentLoginBinding
+import com.google.android.material.snackbar.Snackbar
 
 class LoginFragment : Fragment() {
     private var _binding: FragmentLoginBinding? = null
@@ -27,10 +28,26 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        
+        viewModel.errorState.observe(viewLifecycleOwner) {
+            showErrorInSnackBar(it)
+        }
 
-        binding.buttonCreateAccount.setOnClickListener {
+        viewModel.navigateToAppointmentScreenState.observe(viewLifecycleOwner) {
+            navigateToAppointmentScreen()
+        }
+
+        viewModel.navigateToSignupScreenState.observe(viewLifecycleOwner) {
             navigateToSignup()
         }
+    }
+
+    private fun navigateToAppointmentScreen() {
+        println("navigated")
+    }
+
+    private fun showErrorInSnackBar(message: String) {
+        Snackbar.make(binding.root, message, Snackbar.LENGTH_LONG).show()
     }
 
     private fun navigateToSignup() {

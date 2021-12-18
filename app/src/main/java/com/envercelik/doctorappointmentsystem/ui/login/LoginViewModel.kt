@@ -3,6 +3,11 @@ package com.envercelik.doctorappointmentsystem.ui.login
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.envercelik.doctorappointmentsystem.Resource.*
+import com.envercelik.doctorappointmentsystem.data.FirebaseAuthService
+import com.hadilq.liveevent.LiveEvent
+import kotlinx.coroutines.launch
 
 class LoginViewModel : ViewModel() {
     private val validator = LoginValidator()
@@ -16,14 +21,53 @@ class LoginViewModel : ViewModel() {
     private val _passwordErrorMessage = MutableLiveData<String?>()
     val passwordErrorMessage: LiveData<String?> = _passwordErrorMessage
 
+    private val _loadingBarState = MutableLiveData<Boolean>(false)
+    val loadingBarState: LiveData<Boolean> = _loadingBarState
+
+    private val _navigateToAppointmentScreenState = LiveEvent<Boolean>()
+    val navigateToAppointmentScreenState: LiveEvent<Boolean> = _navigateToAppointmentScreenState
+
+    private val _navigateToSignupScreenState = LiveEvent<Boolean>()
+    val navigateToSignupScreenState: LiveEvent<Boolean> = _navigateToSignupScreenState
+
+    private val _errorState = LiveEvent<String>()
+    val errorState: LiveData<String> = _errorState
+
     fun onLoginButtonClicked() {
         if (isEmailValid() and isPasswordValid()) {
             val email = email.value.toString()
             val password = password.value.toString()
-            println(email)
-            println(password)
-            //send login request
+
+            login(email, password)
         }
+    }
+
+    fun onCreateAccountButtonClicked() {
+        _navigateToSignupScreenState.value = true
+    }
+
+    private fun login(email: String, password: String) {
+        viewModelScope.launch {
+            when (val response = FirebaseAuthService.login(email, password)) {
+                is Success -> onLoginResponseSuccess()
+                is Loading -> onLoginResponseLoading()
+                is Error -> onSignupResponseFail(response.message!!)
+            }
+        }
+    }
+
+    private fun onLoginResponseSuccess() {
+        _loadingBarState.value = false
+        _navigateToAppointmentScreenState.value = true
+    }
+
+    private fun onLoginResponseLoading() {
+        _loadingBarState.value = true
+    }
+
+    private fun onSignupResponseFail(message: String) {
+        _loadingBarState.value = false
+        _errorState.value = message
     }
 
     private fun isEmailValid(): Boolean {

@@ -15,10 +15,21 @@ object FirebaseAuthService {
             Loading<AuthResponse>()
             val result = auth.createUserWithEmailAndPassword(email, password).await()
             Success(AuthResponse(result.user!!.uid))
-        }catch (e: FirebaseAuthException) {
+        } catch (e: FirebaseAuthException) {
             Error(e.message ?: "unexpected error occurred")
+        } catch (e: Exception) {
+            Error("unexpected error occurred. please check your internet connection")
         }
-        catch (e: Exception) {
+    }
+
+    suspend fun login(email: String, password: String): Resource<Boolean> {
+        return try {
+            Loading<Nothing>()
+            auth.signInWithEmailAndPassword(email, password).await()
+            Success(true)
+        } catch (e: FirebaseAuthException) {
+            Error(e.message ?: "unexpected error occurred")
+        } catch (e: Exception) {
             Error("unexpected error occurred. please check your internet connection")
         }
     }
