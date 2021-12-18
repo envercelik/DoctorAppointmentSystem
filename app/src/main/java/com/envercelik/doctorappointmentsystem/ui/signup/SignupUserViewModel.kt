@@ -131,12 +131,12 @@ class SignupUserViewModel : ViewModel() {
 
     private fun isNameSurnameValid(): Boolean {
         _nameSurnameErrorMessage.value = validator.validateNameSurname(nameSurname.value.orEmpty())
-        return _birthDayErrorMessage.value == null
+        return _nameSurnameErrorMessage.value == null
     }
 
     private fun isPasswordValid(): Boolean {
         _passwordErrorMessage.value = validator.validatePassword(password.value.orEmpty())
-        return _birthDayErrorMessage.value == null
+        return _passwordErrorMessage.value == null
     }
 
     private fun isBirthDayValid(): Boolean {
