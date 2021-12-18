@@ -5,6 +5,9 @@
 
     <data>
 
+        <variable
+            name="viewModel"
+            type="com.envercelik.doctorappointmentsystem.ui.login.LoginViewModel" />
     </data>
 
     <FrameLayout
@@ -23,12 +26,14 @@
                 style="@style/roundedTextInputLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/email">
+                android:hint="@string/email"
+                app:error="@{viewModel.emailErrorMessage}">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textEmailAddress" />
+                    android:inputType="textEmailAddress"
+                    android:text="@={viewModel.email}" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -36,12 +41,14 @@
                 style="@style/roundedTextInputLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/password">
+                android:hint="@string/password"
+                app:error="@{viewModel.passwordErrorMessage}">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPassword"
+                    android:text="@={viewModel.password}"
                     app:endIconMode="password_toggle" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -51,6 +58,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="64dp"
                 android:layout_marginTop="16dp"
+                android:onClick="@{() -> viewModel.onLoginButtonClicked()}"
                 android:text="@string/login"
                 android:textAllCaps="false"
                 app:cornerRadius="32dp" />
