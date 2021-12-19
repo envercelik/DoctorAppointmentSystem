@@ -5,6 +5,10 @@
 
     <data>
 
+        <variable
+            name="viewModel"
+            type="com.envercelik.doctorappointmentsystem.ui.signup.SignupDoctorViewModel" />
+
     </data>
 
     <ScrollView
@@ -27,12 +31,14 @@
                     style="@style/roundedTextInputLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/email">
+                    android:hint="@string/email"
+                    app:error="@{viewModel.emailErrorMessage}">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="textEmailAddress" />
+                        android:inputType="textEmailAddress"
+                        android:text="@={viewModel.email}" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -40,12 +46,14 @@
                     style="@style/roundedTextInputLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/password">
+                    android:hint="@string/password"
+                    app:error="@{viewModel.passwordErrorMessage}">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="textPassword"
+                        android:text="@={viewModel.password}"
                         app:endIconMode="password_toggle" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -54,12 +62,14 @@
                     style="@style/roundedTextInputLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/name_surname">
+                    android:hint="@string/name_surname"
+                    app:error="@{viewModel.nameSurnameErrorMessage}">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="textPersonName" />
+                        android:inputType="textPersonName"
+                        android:text="@={viewModel.nameSurname}" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -68,19 +78,22 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/birthday"
+                    app:error="@{viewModel.birthDayErrorMessage}"
                     app:startIconDrawable="@drawable/ic_baseline_date_range_24">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="date"
-                        android:maxLength="4" />
+                        android:maxLength="4"
+                        android:text="@={viewModel.birthDay}" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <RadioGroup
                     android:id="@+id/radioGroupGender"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:checkedButton="@={viewModel.gender}"
                     android:orientation="horizontal">
 
                     <RadioButton
@@ -106,19 +119,22 @@
                     android:layout_marginBottom="16dp"
                     android:text="@string/please_select_gender"
                     android:textColor="@color/errorTextColor"
-                    android:textSize="12sp" />
+                    android:textSize="12sp"
+                    app:isVisible="@{viewModel.isGenderErrorMessageVisible()}" />
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/textInputLayoutHospitalName"
                     style="@style/roundedTextInputLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/hospital">
+                    android:hint="@string/hospital"
+                    app:error="@{viewModel.hospitalErrorMessage}">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="textPersonName" />
+                        android:inputType="textPersonName"
+                        android:text="@={viewModel.hospital}" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -126,12 +142,14 @@
                     style="@style/roundedTextInputLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/clinic">
+                    android:hint="@string/clinic"
+                    app:error="@{viewModel.clinicErrorMessage}">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="textPersonName" />
+                        android:inputType="textPersonName"
+                        android:text="@={viewModel.clinic}" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -139,12 +157,14 @@
                     style="@style/roundedTextInputLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/address">
+                    android:hint="@string/address"
+                    app:error="@{viewModel.addressErrorMessage}">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="textPersonName" />
+                        android:inputType="textPersonName"
+                        android:text="@={viewModel.address}" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <Button
@@ -152,6 +172,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="64dp"
                     android:layout_marginTop="16dp"
+                    android:onClick="@{() -> viewModel.onSignupButtonClicked()}"
                     android:text="@string/signup"
                     app:cornerRadius="32dp" />
             </LinearLayout>

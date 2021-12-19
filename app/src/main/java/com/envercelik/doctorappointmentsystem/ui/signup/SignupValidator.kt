@@ -38,4 +38,21 @@ class SignupValidator {
         !emailValidationPattern.matcher(email).matches() -> "email is invalid"
         else -> null
     }
+
+    fun validateHospital(hospitalName: String) = when {
+        hospitalName.isEmpty() -> "hospital name is required"
+        !hospitalName.all { it.isLetter() || it == ' ' } -> "invalid hospital name"
+        else -> null
+    }
+
+    fun validateClinic(clinicName: String) = when {
+        clinicName.isEmpty() -> "clinic name is required"
+        !clinicName.all { it.isLetter() || it == ' ' } -> "invalid clinic name"
+        else -> null
+    }
+
+    fun validateAddress(address: String) = when {
+        address.isEmpty() -> "address is required"
+        else -> null
+    }
 }
