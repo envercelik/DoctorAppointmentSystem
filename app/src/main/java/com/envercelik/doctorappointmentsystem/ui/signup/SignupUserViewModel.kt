@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.envercelik.doctorappointmentsystem.R
 import com.envercelik.doctorappointmentsystem.Resource.*
+import com.envercelik.doctorappointmentsystem.common.Constants.ROLE_PATIENT
 import com.envercelik.doctorappointmentsystem.data.FirebaseAuthService
 import com.envercelik.doctorappointmentsystem.data.FirebaseProfileService
 import com.envercelik.doctorappointmentsystem.ui.model.User
@@ -109,8 +110,9 @@ class SignupUserViewModel : ViewModel() {
         val nameSurname = nameSurname.value.toString()
         val gender = getGender()
         val birthYear = birthDay.value.toString()
+        val role = ROLE_PATIENT
 
-        return User(nameSurname, gender, birthYear)
+        return User(nameSurname, gender, birthYear, role = role)
     }
 
     private fun getGender() = when (gender.value) {

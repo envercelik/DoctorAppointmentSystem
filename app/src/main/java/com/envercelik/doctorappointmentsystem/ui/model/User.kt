@@ -7,5 +7,5 @@ data class User(
     val hospital: String = "",
     val clinic: String = "",
     val address: String = "",
-    val role: String = ""
+    val role: String
 )
