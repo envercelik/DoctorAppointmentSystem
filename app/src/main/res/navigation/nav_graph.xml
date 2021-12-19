@@ -18,5 +18,12 @@
         <action
             android:id="@+id/action_fragmentLogin_to_fragmentSignup"
             app:destination="@id/fragmentSignup" />
+        <action
+            android:id="@+id/action_fragmentLogin_to_signupDoctorFragment"
+            app:destination="@id/signupDoctorFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/signupDoctorFragment"
+        android:name="com.envercelik.doctorappointmentsystem.ui.signup.SignupDoctorFragment"
+        android:label="SignupDoctorFragment" />
 </navigation>

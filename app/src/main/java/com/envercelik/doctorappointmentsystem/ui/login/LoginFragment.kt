@@ -28,7 +28,7 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        
+
         viewModel.errorState.observe(viewLifecycleOwner) {
             showErrorInSnackBar(it)
         }
@@ -37,9 +37,14 @@ class LoginFragment : Fragment() {
             navigateToAppointmentScreen()
         }
 
-        viewModel.navigateToSignupScreenState.observe(viewLifecycleOwner) {
-            navigateToSignup()
+        viewModel.navigateToUserSignupScreenState.observe(viewLifecycleOwner) {
+            navigateToUserSignup()
         }
+
+        viewModel.navigateToDoctorSignupScreenState.observe(viewLifecycleOwner) {
+            navigateToDoctorSignup()
+        }
+
     }
 
     private fun navigateToAppointmentScreen() {
@@ -50,8 +55,13 @@ class LoginFragment : Fragment() {
         Snackbar.make(binding.root, message, Snackbar.LENGTH_LONG).show()
     }
 
-    private fun navigateToSignup() {
+    private fun navigateToUserSignup() {
         val direction = LoginFragmentDirections.actionFragmentLoginToFragmentSignup()
+        findNavController().navigate(direction)
+    }
+
+    private fun navigateToDoctorSignup() {
+        val direction = LoginFragmentDirections.actionFragmentLoginToSignupDoctorFragment()
         findNavController().navigate(direction)
     }
 

@@ -57,20 +57,36 @@
                 android:id="@+id/buttonSignup"
                 android:layout_width="match_parent"
                 android:layout_height="64dp"
-                android:layout_marginTop="16dp"
                 android:onClick="@{() -> viewModel.onLoginButtonClicked()}"
                 android:text="@string/login"
                 android:textAllCaps="false"
                 app:cornerRadius="32dp" />
 
-            <Button
-                android:id="@+id/buttonCreateAccount"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/create_an_account"
-                android:onClick="@{() -> viewModel.onCreateAccountButtonClicked()}"
-                android:textAllCaps="false" />
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/buttonCreateUserAccount"
+                    style="@style/roundedOutlinedButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="32dp"
+                    android:layout_weight="1"
+                    android:onClick="@{() -> viewModel.onCreateUserAccountButtonClicked()}"
+                    android:text="@string/create_a_user_account" />
+
+                <Button
+                    android:id="@+id/buttonCreateDoctorAccount"
+                    style="@style/roundedOutlinedButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="@{() -> viewModel.onCreateDoctorAccountButtonClicked()}"
+                    android:text="@string/create_a_doctor_account" />
+            </LinearLayout>
+
         </LinearLayout>
 
         <com.google.android.material.progressindicator.CircularProgressIndicator

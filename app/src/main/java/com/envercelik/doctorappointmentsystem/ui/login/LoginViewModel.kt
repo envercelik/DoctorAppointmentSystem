@@ -27,8 +27,11 @@ class LoginViewModel : ViewModel() {
     private val _navigateToAppointmentScreenState = LiveEvent<Boolean>()
     val navigateToAppointmentScreenState: LiveEvent<Boolean> = _navigateToAppointmentScreenState
 
-    private val _navigateToSignupScreenState = LiveEvent<Boolean>()
-    val navigateToSignupScreenState: LiveEvent<Boolean> = _navigateToSignupScreenState
+    private val _navigateToUserSignupScreenState = LiveEvent<Boolean>()
+    val navigateToUserSignupScreenState: LiveEvent<Boolean> = _navigateToUserSignupScreenState
+
+    private val _navigateToDoctorSignupScreenState = LiveEvent<Boolean>()
+    val navigateToDoctorSignupScreenState: LiveEvent<Boolean> = _navigateToDoctorSignupScreenState
 
     private val _errorState = LiveEvent<String>()
     val errorState: LiveData<String> = _errorState
@@ -42,8 +45,12 @@ class LoginViewModel : ViewModel() {
         }
     }
 
-    fun onCreateAccountButtonClicked() {
-        _navigateToSignupScreenState.value = true
+    fun onCreateUserAccountButtonClicked() {
+        _navigateToUserSignupScreenState.value = true
+    }
+
+    fun onCreateDoctorAccountButtonClicked() {
+        _navigateToDoctorSignupScreenState.value = true
     }
 
     private fun login(email: String, password: String) {

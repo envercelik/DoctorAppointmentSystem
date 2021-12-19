@@ -9,8 +9,9 @@
     <string name="signup">Sign up</string>
     <string name="please_select_gender">please select gender</string>
     <string name="login">Login</string>
-    <string name="create_an_account">or create an account?</string>
     <string name="hospital">Hospital</string>
     <string name="clinic">Clinic</string>
     <string name="address">Address</string>
+    <string name="create_a_doctor_account">create a doctor account?</string>
+    <string name="create_a_user_account">create a user account?</string>
 </resources>
