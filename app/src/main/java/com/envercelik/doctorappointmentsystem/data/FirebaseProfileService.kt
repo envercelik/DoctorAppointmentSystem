@@ -22,4 +22,17 @@ object FirebaseProfileService {
             Error("unexpected error occurred. please check your internet connection")
         }
     }
+
+    suspend fun getUserRoleFromFirestore(uid: String): Resource<String> {
+        return try {
+            Loading<String>()
+            val userDocumentById = userCollection.document(uid).get().await()
+            val role = userDocumentById.data!!["role"].toString()
+            Success(role)
+        } catch (e: FirebaseFirestoreException) {
+            Error(e.message ?: "unexpected error occurred")
+        } catch (e: Exception) {
+            Error("unexpected error occurred. please check your internet connection")
+        }
+    }
 }

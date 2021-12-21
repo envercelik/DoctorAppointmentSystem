@@ -22,11 +22,11 @@ object FirebaseAuthService {
         }
     }
 
-    suspend fun login(email: String, password: String): Resource<Boolean> {
+    suspend fun login(email: String, password: String): Resource<AuthResponse> {
         return try {
-            Loading<Nothing>()
-            auth.signInWithEmailAndPassword(email, password).await()
-            Success(true)
+            Loading<AuthResponse>()
+            val result = auth.signInWithEmailAndPassword(email, password).await()
+            Success(AuthResponse(result.user!!.uid))
         } catch (e: FirebaseAuthException) {
             Error(e.message ?: "unexpected error occurred")
         } catch (e: Exception) {

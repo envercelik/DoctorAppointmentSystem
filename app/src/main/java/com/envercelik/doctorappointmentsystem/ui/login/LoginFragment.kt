@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.envercelik.doctorappointmentsystem.common.Constants.ROLE_DOCTOR
+import com.envercelik.doctorappointmentsystem.common.Constants.ROLE_PATIENT
 import com.envercelik.doctorappointmentsystem.databinding.FragmentLoginBinding
 import com.google.android.material.snackbar.Snackbar
 
@@ -33,8 +35,14 @@ class LoginFragment : Fragment() {
             showErrorInSnackBar(it)
         }
 
-        viewModel.navigateToAppointmentScreenState.observe(viewLifecycleOwner) {
-            navigateToAppointmentScreen()
+        viewModel.userRole.observe(viewLifecycleOwner) {
+            if (it == ROLE_DOCTOR) {
+                navigateToDoctorProfile()
+            }
+
+            if (it == ROLE_PATIENT) {
+                navigateToDoctorList()
+            }
         }
 
         viewModel.navigateToUserSignupScreenState.observe(viewLifecycleOwner) {
@@ -47,9 +55,14 @@ class LoginFragment : Fragment() {
 
     }
 
-    private fun navigateToAppointmentScreen() {
-        println("navigated")
+    private fun navigateToDoctorList() {
+        println("navigated doctor list")
     }
+
+    private fun navigateToDoctorProfile() {
+        println("navigated doctor profile")
+    }
+
 
     private fun showErrorInSnackBar(message: String) {
         Snackbar.make(binding.root, message, Snackbar.LENGTH_LONG).show()
