@@ -1,11 +1,8 @@
 package com.envercelik.doctorappointmentsystem.ui.model
 
-data class User(
-    val nameSurname: String,
-    val gender: String,
-    val birthYear: String,
-    val hospital: String = "",
-    val clinic: String = "",
-    val address: String = "",
-    val role: String
-)
+abstract class User {
+    abstract var nameSurname: String
+    abstract var gender: String
+    abstract var birthYear: String
+    abstract var role: String
+}

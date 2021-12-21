@@ -9,7 +9,7 @@ import com.envercelik.doctorappointmentsystem.Resource.*
 import com.envercelik.doctorappointmentsystem.common.Constants.ROLE_PATIENT
 import com.envercelik.doctorappointmentsystem.data.FirebaseAuthService
 import com.envercelik.doctorappointmentsystem.data.FirebaseProfileService
-import com.envercelik.doctorappointmentsystem.ui.model.User
+import com.envercelik.doctorappointmentsystem.ui.model.Patient
 import com.hadilq.liveevent.LiveEvent
 import kotlinx.coroutines.launch
 
@@ -106,13 +106,13 @@ class SignupUserViewModel : ViewModel() {
         _navigateToAppointmentScreenState.value = true
     }
 
-    private fun getUserFromUi(): User {
+    private fun getUserFromUi(): Patient {
         val nameSurname = nameSurname.value.toString()
         val gender = getGender()
         val birthYear = birthDay.value.toString()
         val role = ROLE_PATIENT
 
-        return User(nameSurname, gender, birthYear, role = role)
+        return Patient(nameSurname, gender, birthYear, role)
     }
 
     private fun getGender() = when (gender.value) {
