@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.envercelik.doctorappointmentsystem.R
 import com.envercelik.doctorappointmentsystem.databinding.FragmentUserSignupBinding
 import com.google.android.material.snackbar.Snackbar
@@ -33,13 +34,14 @@ class SignupUserFragment : Fragment(R.layout.fragment_user_signup) {
             showErrorInSnackBar(it)
         }
 
-        viewModel.navigateToAppointmentScreenState.observe(viewLifecycleOwner) {
-            navigateToAppointmentScreen()
+        viewModel.navigateToDoctorList.observe(viewLifecycleOwner) {
+            navigateToDoctorListScreen()
         }
     }
 
-    private fun navigateToAppointmentScreen() {
-        println("navigated")
+    private fun navigateToDoctorListScreen() {
+        val directions = SignupUserFragmentDirections.actionFragmentSignupToDoctorListFragment()
+        findNavController().navigate(directions)
     }
 
     private fun showErrorInSnackBar(message: String) {

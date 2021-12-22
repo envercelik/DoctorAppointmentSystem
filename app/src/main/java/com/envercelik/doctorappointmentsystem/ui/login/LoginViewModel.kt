@@ -34,8 +34,8 @@ class LoginViewModel : ViewModel() {
     private val _errorState = LiveEvent<String>()
     val errorState: LiveData<String> = _errorState
 
-    private val _userRole = MutableLiveData<String>()
-    val userRole: LiveData<String> = _userRole
+    private val _userRole = LiveEvent<String>()
+    val userRole: LiveEvent<String> = _userRole
 
     fun onLoginButtonClicked() {
         if (isEmailValid() and isPasswordValid()) {

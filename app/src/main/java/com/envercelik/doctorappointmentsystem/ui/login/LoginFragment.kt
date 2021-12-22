@@ -56,7 +56,8 @@ class LoginFragment : Fragment() {
     }
 
     private fun navigateToDoctorList() {
-        println("navigated doctor list")
+        val directions = LoginFragmentDirections.actionFragmentLoginToDoctorListFragment()
+        findNavController().navigate(directions)
     }
 
     private fun navigateToDoctorProfile() {

@@ -40,8 +40,8 @@ class SignupUserViewModel : ViewModel() {
     private val _loadingBarState = MutableLiveData<Boolean>(false)
     val loadingBarState: LiveData<Boolean> = _loadingBarState
 
-    private val _navigateToAppointmentScreenState = LiveEvent<Boolean>()
-    val navigateToAppointmentScreenState: LiveEvent<Boolean> = _navigateToAppointmentScreenState
+    private val _navigateToDoctorList = LiveEvent<Boolean>()
+    val navigateToDoctorList: LiveEvent<Boolean> = _navigateToDoctorList
 
     private val _errorState = LiveEvent<String>()
     val errorState: LiveData<String> = _errorState
@@ -103,7 +103,7 @@ class SignupUserViewModel : ViewModel() {
 
     private fun onSaveUserResponseSuccess() {
         _loadingBarState.value = false
-        _navigateToAppointmentScreenState.value = true
+        _navigateToDoctorList.value = true
     }
 
     private fun getUserFromUi(): Patient {

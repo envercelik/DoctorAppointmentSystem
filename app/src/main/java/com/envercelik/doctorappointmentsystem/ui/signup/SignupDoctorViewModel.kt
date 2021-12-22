@@ -128,7 +128,15 @@ class SignupDoctorViewModel : ViewModel() {
         val address = address.value.toString()
         val role = ROLE_DOCTOR
 
-        return Doctor(nameSurname, gender, birthYear, hospital, clinic, address, role)
+        return Doctor(
+            nameSurname = nameSurname,
+            gender = gender,
+            birthYear = birthYear,
+            role = role,
+            hospital = hospital,
+            clinic = clinic,
+            address = address,
+        )
     }
 
     private fun getGender() = when (gender.value) {

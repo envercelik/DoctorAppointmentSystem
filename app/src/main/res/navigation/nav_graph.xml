@@ -9,7 +9,12 @@
         android:id="@+id/fragmentSignup"
         android:name="com.envercelik.doctorappointmentsystem.ui.signup.SignupUserFragment"
         android:label="fragment_signup"
-        tools:layout="@layout/fragment_user_signup" />
+        tools:layout="@layout/fragment_user_signup">
+        <action
+            android:id="@+id/action_fragmentSignup_to_doctorListFragment"
+            app:destination="@id/doctorListFragment"
+            app:popUpTo="@id/nav_graph" />
+    </fragment>
 
     <fragment
         android:id="@+id/fragmentLogin"
@@ -21,9 +26,17 @@
         <action
             android:id="@+id/action_fragmentLogin_to_signupDoctorFragment"
             app:destination="@id/signupDoctorFragment" />
+        <action
+            android:id="@+id/action_fragmentLogin_to_doctorListFragment"
+            app:destination="@id/doctorListFragment"
+            app:popUpTo="@id/nav_graph" />
     </fragment>
     <fragment
         android:id="@+id/signupDoctorFragment"
         android:name="com.envercelik.doctorappointmentsystem.ui.signup.SignupDoctorFragment"
         android:label="SignupDoctorFragment" />
+    <fragment
+        android:id="@+id/doctorListFragment"
+        android:name="com.envercelik.doctorappointmentsystem.ui.doctorlist.DoctorListFragment"
+        android:label="DoctorListFragment" />
 </navigation>

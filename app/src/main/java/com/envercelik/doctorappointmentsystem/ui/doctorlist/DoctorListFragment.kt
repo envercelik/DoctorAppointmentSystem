@@ -5,21 +5,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.envercelik.doctorappointmentsystem.databinding.FragmentDoctorListBinding
-import com.envercelik.doctorappointmentsystem.ui.model.Doctor
+import com.google.android.material.snackbar.Snackbar
 
 class DoctorListFragment : Fragment() {
     private var _binding: FragmentDoctorListBinding? = null
     private val binding get() = _binding!!
-
+    private val viewModel: DoctorListViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentDoctorListBinding.inflate(inflater, container, false)
-
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
     }
 
@@ -32,10 +34,17 @@ class DoctorListFragment : Fragment() {
         binding.recyclerViewDoctors.adapter = adapter
         binding.recyclerViewDoctors.layoutManager = layoutManager
 
-        val doctor1 = Doctor("sds", "sdsd", "sdsd", "sdsd", "sdsd", "sds", "sd")
-        val doctor2 = Doctor("sds", "sdsd", "sdsd", "sdsd", "sdsd", "sds", "sd")
+        viewModel.doctors.observe(viewLifecycleOwner) {
+            adapter.submitList(it)
+        }
 
-        adapter.submitList(mutableListOf(doctor1, doctor2))
+        viewModel.error.observe(viewLifecycleOwner) {
+            showErrorInSnackBar(it)
+        }
+    }
+
+    private fun showErrorInSnackBar(message: String) {
+        Snackbar.make(binding.root, message, Snackbar.LENGTH_LONG).show()
     }
 
     override fun onDestroy() {
