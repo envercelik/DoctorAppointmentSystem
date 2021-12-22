@@ -8,4 +8,6 @@ data class Doctor(
     val hospital: String,
     val clinic: String,
     val address: String,
-) : User()
+) : User() {
+    val uid = nameSurname + gender
+}
