@@ -39,4 +39,8 @@
         android:id="@+id/doctorListFragment"
         android:name="com.envercelik.doctorappointmentsystem.ui.doctorlist.DoctorListFragment"
         android:label="DoctorListFragment" />
+    <fragment
+        android:id="@+id/fragmentAppointment"
+        android:name="com.envercelik.doctorappointmentsystem.ui.appointment.FragmentAppointment"
+        android:label="FragmentAppointment" />
 </navigation>

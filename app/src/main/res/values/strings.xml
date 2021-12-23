@@ -14,4 +14,8 @@
     <string name="address">Address</string>
     <string name="create_a_doctor_account">create a doctor account?</string>
     <string name="create_a_user_account">create a user account?</string>
+    <string name="show">show</string>
+    <string name="see_profile">see profile</string>
+    <string name="please_select_an_hour">please select an hour</string>
+    <string name="pick_date">pick date</string>
 </resources>

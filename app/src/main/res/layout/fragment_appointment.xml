@@ -1,0 +1,111 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="doctor"
+            type="com.envercelik.doctorappointmentsystem.ui.model.Doctor" />
+
+    </data>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp"
+        tools:context="com.envercelik.doctorappointmentsystem.ui.appointment.FragmentAppointment">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imageViewDoctor"
+            android:layout_width="54dp"
+            android:layout_height="60dp"
+            android:background="#F7F7F7"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_launcher_background" />
+
+        <TextView
+            android:id="@+id/textViewDoctorName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="@{doctor.nameSurname}"
+            android:textSize="18sp"
+            app:layout_constraintStart_toEndOf="@+id/imageViewDoctor"
+            app:layout_constraintTop_toTopOf="@+id/imageViewDoctor"
+            tools:text="Name Surname" />
+
+        <TextView
+            android:id="@+id/textViewClinic"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@{doctor.clinic}"
+            app:layout_constraintStart_toEndOf="@+id/imageViewDoctor"
+            app:layout_constraintTop_toBottomOf="@+id/textViewDoctorName"
+            tools:text="Clinic" />
+
+        <Button
+            android:id="@+id/buttonPickDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="8dp"
+            android:text="@string/pick_date"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageViewDoctor" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="379dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:padding="8dp"
+            android:text="@string/please_select_an_hour"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/buttonPickDate" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewAppointmentList"
+            android:layout_width="379dp"
+            android:layout_height="422dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/see_profile"
+            android:textColor="@color/primary"
+            android:textStyle="bold|italic"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textViewDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            app:layout_constraintBottom_toBottomOf="@+id/buttonPickDate"
+            app:layout_constraintStart_toEndOf="@+id/buttonPickDate"
+            app:layout_constraintTop_toTopOf="@+id/buttonPickDate" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/show"
+            app:layout_constraintBottom_toBottomOf="@+id/textViewDate"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textViewDate"
+            app:layout_constraintTop_toTopOf="@+id/textViewDate" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

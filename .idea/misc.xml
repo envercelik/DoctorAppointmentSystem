@@ -5,12 +5,14 @@
       <map>
         <entry key="..\:/Users/devce/Desktop/DoctorAppointmentSystem/app/src/main/res/drawable/ic_baseline_date_range_24.xml" value="0.3828125" />
         <entry key="..\:/Users/devce/Desktop/DoctorAppointmentSystem/app/src/main/res/layout/activity_main.xml" value="0.35260416666666666" />
+        <entry key="..\:/Users/devce/Desktop/DoctorAppointmentSystem/app/src/main/res/layout/fragment_appointment.xml" value="0.2128623188405797" />
         <entry key="..\:/Users/devce/Desktop/DoctorAppointmentSystem/app/src/main/res/layout/fragment_doctor_list.xml" value="0.21875" />
         <entry key="..\:/Users/devce/Desktop/DoctorAppointmentSystem/app/src/main/res/layout/fragment_doctor_signup.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/devce/Desktop/DoctorAppointmentSystem/app/src/main/res/layout/fragment_login.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/devce/Desktop/DoctorAppointmentSystem/app/src/main/res/layout/fragment_signin.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/devce/Desktop/DoctorAppointmentSystem/app/src/main/res/layout/fragment_signup.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/devce/Desktop/DoctorAppointmentSystem/app/src/main/res/layout/fragment_user_signup.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/devce/Desktop/DoctorAppointmentSystem/app/src/main/res/layout/item_appointment.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/devce/Desktop/DoctorAppointmentSystem/app/src/main/res/layout/item_doctor.xml" value="0.21875" />
       </map>
     </option>
