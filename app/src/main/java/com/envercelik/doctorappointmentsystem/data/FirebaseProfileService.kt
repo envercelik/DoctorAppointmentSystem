@@ -14,10 +14,10 @@ import kotlinx.coroutines.tasks.await
 object FirebaseProfileService {
     private val userCollection = Firebase.firestore.collection("users")
 
-    suspend fun createUserInFireStore(user: User, uid: String): Resource<Boolean> {
+    suspend fun createUserInFireStore(user: User): Resource<Boolean> {
         return try {
             Loading<Nothing>()
-            userCollection.document(uid).set(user).await()
+            userCollection.document().set(user).await()
             Success(true)
         } catch (e: FirebaseFirestoreException) {
             Error(e.message ?: "unexpected error occurred")
@@ -26,11 +26,11 @@ object FirebaseProfileService {
         }
     }
 
-    suspend fun getUserRoleFromFirestore(uid: String): Resource<String> {
+    suspend fun getUserRoleFromFirestore(uuid: String): Resource<String> {
         return try {
-            Loading<String>()
-            val userDocumentById = userCollection.document(uid).get().await()
-            val role = userDocumentById.data!!["role"].toString()
+            Loading<Nothing>()
+            val userDocumentByUuid = userCollection.whereEqualTo("uuid", uuid).get().await()
+            val role = userDocumentByUuid.documents[0].data!!["role"].toString()
             Success(role)
         } catch (e: FirebaseFirestoreException) {
             Error(e.message ?: "unexpected error occurred")

@@ -57,7 +57,7 @@ class LoginViewModel : ViewModel() {
     private fun login(email: String, password: String) {
         viewModelScope.launch {
             when (val response = FirebaseAuthService.login(email, password)) {
-                is Success -> onLoginResponseSuccess(response.data!!.uid)
+                is Success -> onLoginResponseSuccess(response.data!!)
                 is Loading -> onLoginResponseLoading()
                 is Error -> onLoginResponseFail(response.message!!)
             }

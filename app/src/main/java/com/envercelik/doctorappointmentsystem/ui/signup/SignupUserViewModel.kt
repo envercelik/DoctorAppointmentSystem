@@ -60,7 +60,7 @@ class SignupUserViewModel : ViewModel() {
     private fun signup(email: String, password: String) {
         viewModelScope.launch {
             when (val response = FirebaseAuthService.signup(email, password)) {
-                is Success -> onSignupResponseSuccess(response.data!!.uid)
+                is Success -> onSignupResponseSuccess(response.data!!)
                 is Loading -> onSignupResponseLoading()
                 is Error -> onSignupResponseFail(response.message!!)
             }
@@ -80,10 +80,10 @@ class SignupUserViewModel : ViewModel() {
         saveUser(uid)
     }
 
-    private fun saveUser(uid: String) {
+    private fun saveUser(uuid: String) {
         viewModelScope.launch {
             when (val response =
-                FirebaseProfileService.createUserInFireStore(getUserFromUi(), uid)) {
+                FirebaseProfileService.createUserInFireStore(makeUser(uuid))) {
                 is Success -> onSaveUserResponseSuccess()
                 is Loading -> onSaveUserResponseLoading()
                 is Error -> onSaveUserResponseFail(response.message!!)
@@ -106,13 +106,13 @@ class SignupUserViewModel : ViewModel() {
         _navigateToDoctorList.value = true
     }
 
-    private fun getUserFromUi(): Patient {
+    private fun makeUser(uuid: String): Patient {
         val nameSurname = nameSurname.value.toString()
         val gender = getGender()
         val birthYear = birthDay.value.toString()
         val role = ROLE_PATIENT
 
-        return Patient(nameSurname, gender, birthYear, role)
+        return Patient(uuid, nameSurname, gender, birthYear, role)
     }
 
     private fun getGender() = when (gender.value) {

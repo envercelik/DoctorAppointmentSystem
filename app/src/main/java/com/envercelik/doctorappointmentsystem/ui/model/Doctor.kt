@@ -1,6 +1,7 @@
 package com.envercelik.doctorappointmentsystem.ui.model
 
 data class Doctor(
+    override var uuid: String = "",
     override var nameSurname: String = "",
     override var gender: String = "",
     override var birthYear: String = "",
@@ -8,6 +9,4 @@ data class Doctor(
     val hospital: String = "",
     val clinic: String = "",
     val address: String = "",
-) : User() {
-    val uid = nameSurname + birthYear
-}
+) : User()
