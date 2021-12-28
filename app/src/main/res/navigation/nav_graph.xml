@@ -38,9 +38,18 @@
     <fragment
         android:id="@+id/doctorListFragment"
         android:name="com.envercelik.doctorappointmentsystem.ui.doctorlist.DoctorListFragment"
-        android:label="DoctorListFragment" />
+        android:label="DoctorListFragment">
+        <action
+            android:id="@+id/action_doctorListFragment_to_fragmentAppointment"
+            app:destination="@id/fragmentAppointment" />
+    </fragment>
     <fragment
         android:id="@+id/fragmentAppointment"
         android:name="com.envercelik.doctorappointmentsystem.ui.appointment.FragmentAppointment"
-        android:label="FragmentAppointment" />
+        android:label="FragmentAppointment">
+        <argument
+            android:name="doctorUid"
+            android:defaultValue='""'
+            app:argType="string" />
+    </fragment>
 </navigation>

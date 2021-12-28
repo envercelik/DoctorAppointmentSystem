@@ -11,6 +11,8 @@ import com.envercelik.doctorappointmentsystem.ui.model.Doctor
 
 class DoctorListAdapter : ListAdapter<Doctor, DoctorListAdapter.DoctorHolder>(DiffCallback()) {
 
+    var itemClickListener: (Doctor) -> Unit = {}
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DoctorHolder {
         val binding = ItemDoctorBinding.inflate(
             LayoutInflater.from(parent.context),
@@ -23,11 +25,13 @@ class DoctorListAdapter : ListAdapter<Doctor, DoctorListAdapter.DoctorHolder>(Di
     override fun onBindViewHolder(holder: DoctorHolder, position: Int) =
         holder.bind(getItem(position))
 
-    class DoctorHolder(private val binding: ItemDoctorBinding) :
+    inner class DoctorHolder(private val binding: ItemDoctorBinding) :
         RecyclerView.ViewHolder(binding.root) {
-
         fun bind(item: Doctor) {
             binding.doctor = item
+            binding.root.setOnClickListener {
+                itemClickListener(item)
+            }
             binding.executePendingBindings()
         }
     }
@@ -35,7 +39,7 @@ class DoctorListAdapter : ListAdapter<Doctor, DoctorListAdapter.DoctorHolder>(Di
     private class DiffCallback : DiffUtil.ItemCallback<Doctor>() {
 
         override fun areItemsTheSame(oldItem: Doctor, newItem: Doctor) =
-            oldItem.uid == newItem.uid
+            oldItem.uuid == newItem.uuid
 
 
         override fun areContentsTheSame(oldItem: Doctor, newItem: Doctor) =

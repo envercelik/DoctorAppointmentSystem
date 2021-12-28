@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.envercelik.doctorappointmentsystem.databinding.FragmentDoctorListBinding
 import com.google.android.material.snackbar.Snackbar
@@ -34,6 +35,10 @@ class DoctorListFragment : Fragment() {
         binding.recyclerViewDoctors.adapter = adapter
         binding.recyclerViewDoctors.layoutManager = layoutManager
 
+        adapter.itemClickListener = {
+            navigateToAppointmentScreen(it.uuid)
+        }
+
         viewModel.doctors.observe(viewLifecycleOwner) {
             adapter.submitList(it)
         }
@@ -41,6 +46,12 @@ class DoctorListFragment : Fragment() {
         viewModel.error.observe(viewLifecycleOwner) {
             showErrorInSnackBar(it)
         }
+    }
+
+    private fun navigateToAppointmentScreen(uid: String) {
+        val directions =
+            DoctorListFragmentDirections.actionDoctorListFragmentToFragmentAppointment(uid)
+        findNavController().navigate(directions)
     }
 
     private fun showErrorInSnackBar(message: String) {
