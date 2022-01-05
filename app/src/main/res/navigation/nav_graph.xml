@@ -51,5 +51,17 @@
             android:name="doctorUid"
             android:defaultValue='""'
             app:argType="string" />
+        <action
+            android:id="@+id/action_fragmentAppointment_to_doctorDetailFragment"
+            app:destination="@id/doctorDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/doctorDetailFragment"
+        android:name="com.envercelik.doctorappointmentsystem.ui.doctordetail.DoctorDetailFragment"
+        android:label="DoctorDetailFragment">
+        <argument
+            android:name="uid"
+            android:defaultValue='""'
+            app:argType="string" />
     </fragment>
 </navigation>
