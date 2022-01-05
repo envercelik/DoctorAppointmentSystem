@@ -57,4 +57,18 @@ object FirebaseProfileService {
             emit(Error("unexpected error occurred. please check your internet connection"))
         }
     }
+
+    suspend fun getDoctorFromFirestoreById(uid: String) = flow {
+        try {
+            emit(Loading())
+            val doctorSnapshot = userCollection.whereEqualTo("uuid", uid).get().await()
+            println(doctorSnapshot.documents)
+            val doctor = doctorSnapshot.documents[0].toObject<Doctor>()
+            emit(Success(doctor))
+        } catch (e: FirebaseFirestoreException) {
+            emit(Error(e.message ?: "unexpected error occurred"))
+        } catch (e: Exception) {
+            emit(Error("unexpected error occurred. please check your internet connection"))
+        }
+    }
 }

@@ -3,6 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.envercelik.doctorappointmentsystem.ui.doctordetail.DoctorDetailViewModel" />
+    </data>
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -35,6 +42,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
+                android:text="@{viewModel.doctor.nameSurname}"
                 android:textColor="@color/white"
                 android:textSize="24sp"
                 app:layout_constraintStart_toEndOf="@id/imageViewProfileImage"
@@ -46,6 +54,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
+                android:text="@{viewModel.doctor.clinic}"
                 android:textColor="@color/white"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="@id/textViewDoctorName"
@@ -56,6 +65,7 @@
                 android:id="@+id/textViewHospitalName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="@{viewModel.doctor.hospital}"
                 android:textColor="@color/white"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="@id/imageViewProfileImage"
@@ -103,6 +113,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
+                android:text="@{viewModel.doctor.address}"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toStartOf="@+id/guidelineEnd"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -128,6 +139,7 @@
                 android:id="@+id/progressIndicator"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                app:isVisible="@{viewModel.loading}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
